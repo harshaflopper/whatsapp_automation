@@ -1,142 +1,285 @@
 # WhatsApp Broadcast & Automation Dashboard
 
-Our own WhatsApp dashboard on **Meta's official WhatsApp Cloud API**: contacts, segments, template manager,
-broadcasts with live delivery ticks, and a simple inbox. It runs on Meta's free test number for demos, and a
-client's real number is just an environment change.
+<div align="center">
 
-> **Status:** Phase 1 of 6 (setup, auth, settings, Meta provider, test send). Later sections are marked *(coming)*.
+[![Next.js](https://img.shields.io/badge/Next.js-16.4-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-7.1-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Meta Cloud API](https://img.shields.io/badge/Meta_Cloud_API-v26.0-0081FB?style=for-the-badge&logo=meta&logoColor=white)](https://developers.facebook.com/docs/whatsapp/cloud-api)
+[![Vitest](https://img.shields.io/badge/Vitest-5.0-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-**Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 + shadcn/ui · PostgreSQL + Prisma 7 · Vitest
+An enterprise-ready WhatsApp Broadcast, Campaign Automation, and Conversational Inbox dashboard engineered directly on **Meta's Official WhatsApp Cloud API (Graph API v26.0)**. Built with Next.js 16, PostgreSQL, Prisma 7, and a high-performance transactional outbox queue.
+
+[Explore Features](#feature-tour) • [Architecture](#architecture) • [Quickstart](#local-development) • [Meta Setup](#meta-developer-setup)
+
+<br/>
+
+<img src="docs/screenshots/02_dashboard.png" alt="WhatsApp Automation Dashboard Overview" width="100%" style="border-radius: 14px; box-shadow: 0 20px 40px rgba(0,0,0,0.18);" />
+
+</div>
 
 ---
 
-## 1. Run it locally
+## Highlights
 
-**You need:** Node.js 20+ and a Postgres database (any of the options below).
+- **Direct Meta Cloud API Integration**: Zero third-party markups (Gupshup, Wati, AiSensy). Runs natively on Meta's official Graph API infrastructure.
+- **Transactional Outbox & Safe Queue**: Concurrent queue processing using PostgreSQL `SELECT ... FOR UPDATE OF m SKIP LOCKED`. Never double-sends, drops, or duplicates a message.
+- **Automated Compliance Engine**: Strict server-side enforcement of Meta's 24-hour customer service window, explicit opt-in verifications, and automated keyword handling (`STOP`, `UNSUBSCRIBE`, `START`).
+- **Real-Time Funnel Analytics**: Granular tracking across every broadcast: `Sent` -> `Delivered` -> `Read` -> `Replied` -> `Failed` with reason breakdowns.
+- **Interactive Design Studio with Live Preview**: Visual template builder with parameter mapping and an interactive smartphone simulator reflecting approved formatting in real time.
+- **Conversational 2-Way Inbox**: Responsive chat interface with customer service countdown timer, status badges, and quick-reply presets.
+- **Executive Titanium UI**: Tailored burnished bronze & dark titanium design system with white-label business customization.
+
+---
+
+## Feature Tour
+
+### 1. Executive Dashboard & Real-Time Overview
+A bird's-eye view of your business messaging pipeline. Track active subscribers, monthly transmission volume, delivery ratios, pending action items (unread customer chats, templates under review, failed deliveries), and recent broadcast history.
+
+<p align="center">
+  <img src="docs/screenshots/02_dashboard.png" alt="Executive Home Dashboard" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 2. Contact Management & Segmentation
+Comprehensive address book with international E.164 phone sanitization, opt-in status auditing, custom tags, and dynamic group segmentation. Features a high-speed CSV/Excel spreadsheet import wizard with column-mapping intelligence and deduplication.
+
+<p align="center">
+  <img src="docs/screenshots/03_contacts.png" alt="Contacts and Audience Manager" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 3. Message Design Studio & Template Library
+Create, organize, and sync pre-approved WhatsApp templates across Marketing, Utility, and Authentication categories. Displays live submission review statuses (`Approved`, `Under Review`, `Needs Changes`) directly from Meta's review network.
+
+<p align="center">
+  <img src="docs/screenshots/04_designs.png" alt="Message Designs Catalog" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 4. Visual Template Editor with Live Smartphone Preview
+Author dynamic templates with headers, body variables (`{{1}}`, `{{2}}`), footers, URL buttons, and quick-reply triggers. The real-time interactive preview renders exact mobile bubble sizing, fonts, and button behaviors as customers will see them on WhatsApp.
+
+<p align="center">
+  <img src="docs/screenshots/05_editor.png" alt="Design Editor with Phone Simulator" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 5. Multi-Step Campaign Broadcast Wizard
+A guided campaign dispatch system: select target groups, pick approved templates, map personalizing dynamic fields (Customer Name, City, Custom Values), schedule for future dispatch or trigger instant sending with real-time cost estimation.
+
+<p align="center">
+  <img src="docs/screenshots/07_wizard.png" alt="Campaign Broadcast Wizard" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 6. Broadcast Reports & Delivery Funnel Analytics
+Inspect completed and in-flight campaigns down to the individual recipient. View delivery conversion funnels, filter by status, search by customer name, export CSV audit logs, or pause/resume queued transmissions.
+
+<p align="center">
+  <img src="docs/screenshots/06_campaigns.png" alt="Campaign Analytics and Funnel Report" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 7. Conversational 2-Way Inbox
+Engage with customer replies directly from the dashboard. Displays the 24-hour customer service window timer, past campaign interaction badges, delivery ticks (sent, delivered, read), and customer unsubscribe status.
+
+<p align="center">
+  <img src="docs/screenshots/08_chats.png" alt="Conversational 2-Way WhatsApp Inbox" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 8. White-Label Account & Branding Settings
+Configure the business profile, custom brand logo, contact coordinates, test recipient phone numbers, and administrative security credentials.
+
+<p align="center">
+  <img src="docs/screenshots/09_account.png" alt="Account and Branding Settings" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+### 9. Secure Authenticated Gateway
+Protected dashboard routes with signed HTTP-only cookies (`jose` webcrypto HMAC), timing-safe constant-time string comparisons, and route protection proxy.
+
+<p align="center">
+  <img src="docs/screenshots/01_login.png" alt="Authentication Gateway" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+</p>
+
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client["Client Browser"]
+        UI["Next.js 16 App Router UI"]
+    end
+
+    subgraph Server["Next.js Application Layer"]
+        Proxy["Proxy Gateway (Route Guard)"]
+        Services["Service Layer (Campaigns, Contacts, Chats)"]
+        Queue["Queue Engine (SKIP LOCKED Worker)"]
+        Provider["MessagingProvider Seam"]
+        MetaProvider["MetaCloudProvider (Graph API v26.0)"]
+    end
+
+    subgraph Data["Persistence Layer"]
+        DB[("PostgreSQL Database\n(Prisma ORM 7)")]
+    end
+
+    subgraph Meta["Meta Cloud Infrastructure"]
+        GraphAPI["Meta Graph API\n(Messages & Templates)"]
+        Webhooks["Webhook Ingestion\n(HMAC-SHA256 Signed)"]
+    end
+
+    UI --> Proxy --> Services
+    Services --> DB
+    Services --> Queue
+    Queue --> DB
+    Queue --> Provider
+    Provider --> MetaProvider
+    MetaProvider --> GraphAPI
+    Webhooks --> Services
+    Services --> DB
+```
+
+### Key Technical Mechanisms
+
+- **PostgreSQL Outbox Concurrency**: Message rows are drafted as `QUEUED`. The queue processor claims batches via `SELECT ... FOR UPDATE OF m SKIP LOCKED`, preventing race conditions across concurrent workers or cron jobs.
+- **Monotonic Status Transitions**: Webhook delivery updates enforce state ranking (`QUEUED` -> `SENDING` -> `SENT` -> `DELIVERED` -> `READ`). Out-of-order webhook deliveries from Meta can never downgrade or corrupt message states.
+- **Credential Sanitization**: Access tokens are isolated to HTTP request headers and redacted from error strings, database tables, and client responses.
+- **Automatic Opt-Out**: Immediate detection of keywords like `STOP`, `UNSUBSCRIBE`, and `CANCEL` cancels all in-flight outbound messages for that contact and logs compliance audit entries.
+
+---
+
+## Local Development
+
+### Prerequisites
+
+- **Node.js**: v20 or newer
+- **Database**: PostgreSQL (Docker, local instance, or Supabase/Neon)
+- **Meta Developer Account**: Free test number & access token
+
+### 1. Clone & Install
 
 ```bash
+git clone https://github.com/harshaflopper/whatsapp_automation.git
+cd whatsapp_automation
 npm install
-cp .env.example .env          # then fill it in (see "Environment variables" below)
 ```
 
-Start a local Postgres. Pick **one**:
+### 2. Configure Environment
 
-| Option | Command | `DATABASE_URL` |
-| --- | --- | --- |
-| A. Docker | `docker compose up -d` | `postgresql://wa:wa@localhost:5433/wa_dashboard` |
-| B. No Docker | `npx prisma dev --name wa-dashboard --detach --db-port 51214` | `postgres://postgres:postgres@localhost:51214/template1?sslmode=disable` |
-| C. Supabase | create a project | pooled URL (port 6543, `?pgbouncer=true`) in `DATABASE_URL`, direct URL (5432) in `DIRECT_URL` |
-
-Then:
+Copy the example environment configuration:
 
 ```bash
-npm run db:migrate            # creates the tables
-npm run dev                   # http://localhost:3000
+cp .env.example .env
 ```
 
-Sign in with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from your `.env`.
+Set the database connection and administrator credentials in `.env`:
 
-### Useful scripts
-
-| Script | What it does |
-| --- | --- |
-| `npm run dev` | Dev server |
-| `npm test` | Unit tests (webhook signature, phone normalisation, 24h window, opt-out, Meta payloads) |
-| `npm run typecheck` | TypeScript check |
-| `npm run db:migrate` | Apply schema changes in development |
-| `npm run db:deploy` | Apply migrations in production |
-| `npm run db:studio` | Browse the database |
-
----
-
-## 2. Environment variables
-
-All credentials come from the environment. Nothing is hard-coded, and secrets are masked in the UI.
-
-| Variable | Where to get it |
-| --- | --- |
-| `DATABASE_URL`, `DIRECT_URL` | Your Postgres (see above). `DIRECT_URL` is only needed for Supabase. |
-| `WA_GRAPH_VERSION` | Graph API version. Default `v26.0` (latest stable as of Oct 2026). |
-| `WA_PHONE_NUMBER_ID` | Meta → your app → WhatsApp → **API Setup** → "Phone number ID" |
-| `WA_BUSINESS_ACCOUNT_ID` | Same page → "WhatsApp Business Account ID" |
-| `WA_ACCESS_TOKEN` | A **permanent System User token** (step 6 below). The token on the API Setup page expires in 24h. |
-| `WA_APP_SECRET` | Meta → your app → **App settings → Basic** → App secret (used to verify webhooks) |
-| `WA_WEBHOOK_VERIFY_TOKEN` | Any random string you choose; you'll paste the same value into Meta (Phase 2) |
-| `WA_SEND_RATE_PER_SEC` | Queue throttle (default 10/s) |
-| `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Dashboard login |
-| `AUTH_SECRET` | 32+ random chars: `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"` |
-| `APP_NAME`, `APP_LOGO_URL` | White-label branding per client |
-| `CRON_SECRET` | Protects the queue endpoint *(Phase 5)* |
-| `DEMO_RECIPIENTS` | Your verified test phones, comma-separated, used by the seed *(Phase 6)* |
-
----
-
-## 3. Meta developer setup (step by step)
-
-You need a personal Facebook account and about 20 minutes.
-
-1. **Create a Meta developer account** at <https://developers.facebook.com> (log in → *Get started*).
-2. **Create an app**: *My Apps → Create app* → use case **"Connect with customers through WhatsApp"** (or type
-   *Business*) → give it a name → link or create a **Business portfolio**.
-3. **Add the WhatsApp product** if it isn't added automatically: app dashboard → *Add product → WhatsApp → Set up*.
-4. **Get the test number**: *WhatsApp → API Setup*. Meta gives you a free **test phone number** and a test
-   WhatsApp Business Account. Copy the **Phone number ID** and **WhatsApp Business Account ID** into `.env`.
-5. **Add up to 5 recipient numbers**: on the same page, under **"To"** → *Manage phone number list* → add each
-   demo phone (with country code) and enter the code WhatsApp sends to it. Only these numbers can receive
-   messages from the test number.
-6. **Create a permanent token (System User)**:
-   1. Go to <https://business.facebook.com/settings> → your business → **Users → System users → Add**.
-      Name it e.g. `wa-dashboard`, role **Admin**.
-   2. **Assign assets**: select the system user → *Assign assets* → **Apps** → your app → *Full control*;
-      and **WhatsApp accounts** → your WABA → *Full control*.
-   3. **Generate new token** → choose your app → expiry **Never** → tick
-      `whatsapp_business_messaging` and `whatsapp_business_management` → *Generate*.
-   4. Copy it into `WA_ACCESS_TOKEN`. (It's shown only once. Store it in your password manager.)
-7. **App secret**: *App settings → Basic → App secret → Show* → copy into `WA_APP_SECRET`.
-8. **Restart** `npm run dev`, open **Settings**: it should show **Connected** with the test number.
-9. **Webhook** (callback URL, verify token, subscribe to `messages` and `message_template_status_update`):
-   *(Phase 2: instructions will be added here, including ngrok/cloudflared for local development.)*
-
-### Phase 1 check: send `hello_world`
-
-Settings → **Send a test message** → enter one of your verified recipient numbers → *Send test message*.
-The phone should get Meta's "Hello World" message within seconds. Common errors are explained in plain English;
-for example **"This number isn't added as a test recipient in Meta yet"** means step 5 is missing for that number.
-
----
-
-## 4. Architecture notes
-
-```
-src/
-  app/
-    login/                  sign-in (server action, signed httpOnly cookie)
-    (dashboard)/            authenticated pages (sidebar on desktop, drawer on mobile)
-      settings/             connection status, masked credentials, test send
-  lib/
-    messaging/
-      provider.ts           MessagingProvider interface (provider-neutral types)
-      meta/                 MetaCloudProvider, error-code table, webhook parser
-      compliance.ts         opt-in / opt-out / 24h-window rules (enforced server-side)
-      index.ts              getProvider(): picks the provider from env
-    services/               business operations used by pages, worker and API routes
-    phone.ts                E.164 normalisation (+91 default)
-    env.ts  db.ts  auth.ts  session.ts
-  proxy.ts                  route protection (Next 16's replacement for middleware)
-prisma/schema.prisma        full data model for all phases
-tests/                      Vitest unit tests
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/whatsapp_db
+ADMIN_EMAIL=owner@example.com
+ADMIN_PASSWORD=admin123
+AUTH_SECRET=super-secret-random-32-character-string
 ```
 
-- **Provider seam**: UI and business logic only use `MessagingProvider`. Supporting Gupshup or AiSensy later
-  means adding a class in `lib/messaging/` and setting `MESSAGING_PROVIDER`.
-- **Every outbound message is a `Message` row** with its `wamid`, so status webhooks can update it. Queued rows
-  will double as the send queue (Phase 5).
-- **Compliance is enforced in the send layer**: templates need an opt-in; free text needs an open 24h window;
-  opted-out contacts are blocked everywhere.
-- **Secrets**: the access token is sent only in the `Authorization` header (never in URLs), and Meta's error
-  messages are scrubbed of anything token-like before they reach logs, the database or the UI.
+### 3. Database Migration & Seed
+
+Run migrations to create the schema, then optionally load demo seed contacts and templates:
+
+```bash
+npm run db:migrate
+npm run seed
+```
+
+### 4. Start Development Server & Worker
+
+In your primary terminal:
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000` and sign in with your `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
+
+To process scheduled campaigns and queued outbound messages locally:
+
+```bash
+npm run worker
+```
 
 ---
 
-## 5. Deploying to Vercel *(coming in a later phase)*
-## 6. 5-minute client demo script *(coming in Phase 6)*
+## Project Structure
+
+```
+├── docs/screenshots/            # High-resolution feature captures
+├── prisma/
+│   ├── schema.prisma            # PostgreSQL data model (Prisma 7)
+│   ├── migrations/              # Migration history
+│   └── seed.ts                  # Demo seed generator
+├── scripts/
+│   └── worker.ts                # Standalone queue daemon
+├── src/
+│   ├── app/
+│   │   ├── (dashboard)/         # Authenticated dashboard views
+│   │   │   ├── page.tsx         # Overview metrics & quick tasks
+│   │   │   ├── contacts/        # Address book & CSV import
+│   │   │   ├── designs/         # Template builder & phone preview
+│   │   │   ├── campaigns/       # Broadcast wizard & reports
+│   │   │   ├── chats/           # 2-way live inbox
+│   │   │   └── account/         # White-label settings
+│   │   ├── api/
+│   │   │   ├── brand-logo/      # Dynamic brand logo streamer
+│   │   │   ├── cron/process/    # Vercel/cron-job queue trigger
+│   │   │   └── webhooks/        # Meta webhook ingestion
+│   │   ├── login/               # Sign-in portal
+│   │   └── proxy.ts             # Gateway security layer
+│   ├── components/
+│   │   ├── app/                 # Domain UI: phone-preview, kit, nav, status
+│   │   └── ui/                  # Primitives: button, dialog, table, input
+│   └── lib/
+│       ├── messaging/           # Meta Cloud Provider seam & compliance
+│       ├── services/            # Business operations & queue processor
+│       ├── auth.ts              # Session verification
+│       └── db.ts                # Prisma client singleton
+└── tests/                       # Unit test suites (compliance, signatures, payloads)
+```
+
+---
+
+## Meta Developer Setup
+
+1. **Meta Developers**: Visit [developers.facebook.com](https://developers.facebook.com) and create an app with use case **Connect with customers through WhatsApp**.
+2. **API Setup**: Under **WhatsApp -> API Setup**, obtain your **Phone Number ID** and **WhatsApp Business Account ID**.
+3. **Verified Recipients**: For sandbox test numbers, add your demo recipient numbers under *Manage phone number list*.
+4. **Permanent Token**: Create a System User in [Business Manager](https://business.facebook.com/settings) with `whatsapp_business_messaging` and `whatsapp_business_management` permissions, and assign Full Control of the app and WABA.
+5. **Webhooks**: Configure `https://<your-domain>/api/webhooks/whatsapp`, verify with your `WA_WEBHOOK_VERIFY_TOKEN`, and subscribe to `messages` and `message_template_status_update`.
+
+---
+
+## Test Suite
+
+Run the Vitest test suite covering webhook signature validation, phone normalization, the 24-hour customer window, and opt-out enforcement:
+
+```bash
+npm test
+```
+
+---
+
+## License
+
+Private & Proprietary. All rights reserved.
