@@ -31,11 +31,28 @@ async function readSettings(keys: readonly string[]): Promise<Record<string, str
   }
 }
 
+export function normalizeLogoUrl(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  // If it's a web URL or data URI
+  if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith("data:")) {
+    return trimmed;
+  }
+  // If it's already a relative web path and not a Windows file path
+  if (trimmed.startsWith("/") && !trimmed.includes("\\") && !/^[A-Za-z]:/.test(trimmed)) {
+    return trimmed;
+  }
+  // Local filesystem path (e.g. D:\internwhatsapp\image.png) or filename
+  return "/api/brand-logo";
+}
+
 export async function getBusinessProfile(): Promise<BusinessProfile> {
   const s = await readSettings(PROFILE_KEYS);
+  const rawLogo = s.logoUrl?.trim() || process.env.APP_LOGO_URL?.trim() || null;
   return {
     businessName: s.businessName?.trim() || process.env.APP_NAME?.trim() || "Your Business",
-    logoUrl: s.logoUrl?.trim() || process.env.APP_LOGO_URL?.trim() || null,
+    logoUrl: normalizeLogoUrl(rawLogo),
     address: s.address ?? "",
     supportPhone: s.supportPhone ?? process.env.SUPPORT_PHONE ?? "",
     supportEmail: s.supportEmail ?? process.env.SUPPORT_EMAIL ?? "",

@@ -91,7 +91,7 @@ export function ChatList({
               >
                 <span className="relative">
                   <Avatar name={c.name} />
-                  {c.windowOpen && <span className="absolute -right-0.5 -bottom-0.5 size-3 rounded-full border-2 border-card bg-[oklch(0.62_0.13_236)]" title="Reply window open" />}
+                  {c.windowOpen && <span className="absolute -right-0.5 -bottom-0.5 size-3 rounded-full border-2 border-card bg-primary" title="Reply window open" />}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex items-baseline justify-between gap-2">

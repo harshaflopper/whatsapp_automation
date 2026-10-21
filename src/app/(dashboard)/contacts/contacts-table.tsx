@@ -253,7 +253,7 @@ export function ContactsTable({
                       aria-label="Select all on this page"
                       checked={allOnPage}
                       onChange={(e) => setSelected(e.target.checked ? new Set(rows.map((r) => r.id)) : new Set())}
-                      className="size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+                      className="size-4 cursor-pointer accent-primary"
                     />
                   </th>
                   <th className="py-3 pr-4 font-semibold">Name</th>
@@ -280,7 +280,7 @@ export function ContactsTable({
                             else next.delete(r.id);
                             setSelected(next);
                           }}
-                          className="size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+                          className="size-4 cursor-pointer accent-primary"
                         />
                       </td>
                       <td className="py-2.5 pr-4">

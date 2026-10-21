@@ -61,8 +61,8 @@ export default async function CampaignsPage({ searchParams }: PageProps<"/campai
         <>
           <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <StatCard label="Campaigns this month" value={formatNumber(month.length)} icon={Send} tone="iris" />
-            <StatCard label="Delivered" value={`${percent(m.delivered, m.sent)}%`} icon={CheckCheck} tone="sky" hint={`${formatNumber(m.delivered)} of ${formatNumber(m.sent)} messages`} />
-            <StatCard label="Read" value={`${percent(m.read, m.sent)}%`} icon={Eye} tone="violet" hint={`${formatNumber(m.read)} customers read your messages`} />
+            <StatCard label="Delivered" value={`${percent(m.delivered, m.sent)}%`} icon={CheckCheck} tone="slate" hint={`${formatNumber(m.delivered)} of ${formatNumber(m.sent)} messages`} />
+            <StatCard label="Read" value={`${percent(m.read, m.sent)}%`} icon={Eye} tone="iris" hint={`${formatNumber(m.read)} customers read your messages`} />
             <StatCard label="Replies" value={formatNumber(m.replied)} icon={MessageCircleReply} tone="amber" hint={`${percent(m.replied, m.sent)}% of customers replied`} />
           </div>
 
@@ -115,7 +115,7 @@ export default async function CampaignsPage({ searchParams }: PageProps<"/campai
                             <span className="text-muted-foreground">—</span>
                           ) : (
                             <div className="flex items-center gap-2">
-                              <Meter value={d} tone="sky" className="w-16" />
+                              <Meter value={d} tone="iris" className="w-16" />
                               <span className="tabular-nums">{d}%</span>
                             </div>
                           )}

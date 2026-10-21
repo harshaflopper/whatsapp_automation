@@ -194,7 +194,7 @@ function ContactForm({
             type="checkbox"
             checked={subscribed}
             onChange={(e) => setSubscribed(e.target.checked)}
-            className="mt-0.5 size-4 shrink-0 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+            className="mt-0.5 size-4 shrink-0 cursor-pointer accent-primary"
           />
           <span>
             <span className="block text-sm font-semibold">This customer agreed to receive WhatsApp messages</span>

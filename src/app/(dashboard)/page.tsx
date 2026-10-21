@@ -39,7 +39,7 @@ export default async function HomePage() {
   if (data.todo.lastCampaign && data.todo.lastCampaign.failed > 0)
     todos.push({
       href: `/campaigns/${data.todo.lastCampaign.id}?filter=not_delivered`,
-      tone: "sky",
+      tone: "rose",
       icon: CircleAlert,
       title: `${data.todo.lastCampaign.failed} ${data.todo.lastCampaign.failed === 1 ? "number" : "numbers"} couldn't receive your last campaign`,
       text: "Check and fix those numbers.",
@@ -81,12 +81,12 @@ export default async function HomePage() {
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <StatCard label="Contacts" value={formatNumber(data.contacts)} icon={Users} tone="iris" hint={<Link href="/contacts" className="font-medium text-primary hover:underline">View all contacts</Link>} />
-        <StatCard label="Messages sent this month" value={formatNumber(data.sentThisMonth)} icon={Send} tone="sky" hint="Campaigns, replies and single messages" />
+        <StatCard label="Messages sent this month" value={formatNumber(data.sentThisMonth)} icon={Send} tone="slate" hint="Campaigns, replies and single messages" />
         <StatCard
           label="Delivered this month"
           value={formatNumber(data.deliveredThisMonth)}
           icon={CheckCheck}
-          tone="violet"
+          tone="iris"
           hint={data.sentThisMonth ? `${deliveredPct}% of messages sent` : "Shows up once you send"}
         />
       </div>

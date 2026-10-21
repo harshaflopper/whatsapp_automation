@@ -27,12 +27,12 @@ export function Brand({
     <div className={cn("flex min-w-0 items-center gap-3", className)}>
       {logoUrl ? (
         // eslint-disable-next-line @next/next/no-img-element -- arbitrary client logo URL
-        <img src={logoUrl} alt="" className={cn(box, "shrink-0 bg-white object-contain p-1")} />
+        <img src={logoUrl} alt="" className={cn(box, "shrink-0 rounded-xl object-contain bg-card ring-1 ring-border/40 p-0.5")} />
       ) : (
         <span
           className={cn(
             box,
-            "grid shrink-0 place-items-center bg-gradient-to-br from-[oklch(0.62_0.2_277)] to-[oklch(0.48_0.23_292)] font-bold text-white shadow-[0_6px_18px_-6px_oklch(0.52_0.215_277/0.7)]",
+            "grid shrink-0 place-items-center bg-gradient-to-br from-[oklch(0.64_0.16_65)] to-[oklch(0.48_0.14_52)] font-bold text-white shadow-[0_6px_18px_-6px_oklch(0.54_0.165_62/0.6)]",
           )}
         >
           {letters || "B"}

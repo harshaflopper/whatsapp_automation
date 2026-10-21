@@ -354,7 +354,7 @@ export function ImportWizard({ groups }: { groups: { id: string; name: string }[
                 type="checkbox"
                 checked={updateExisting}
                 onChange={(e) => setUpdateExisting(e.target.checked)}
-                className="mt-0.5 size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+                className="mt-0.5 size-4 cursor-pointer accent-primary"
               />
               <span className="text-sm">
                 <span className="font-medium">Update customers I already have</span>
@@ -367,7 +367,7 @@ export function ImportWizard({ groups }: { groups: { id: string; name: string }[
                 type="checkbox"
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
-                className="mt-0.5 size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+                className="mt-0.5 size-4 cursor-pointer accent-primary"
               />
               <span className="text-sm">
                 <span className="font-semibold">These customers agreed to receive WhatsApp messages from my business</span>

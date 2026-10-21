@@ -68,7 +68,7 @@ export default async function ChatPage({ params, searchParams }: PageProps<"/cha
             {unsubscribed ? (
               <Pill tone="slate">Unsubscribed</Pill>
             ) : thread.windowOpen ? (
-              <Pill tone="sky" dot>
+              <Pill tone="iris" dot>
                 <span className="hidden sm:inline">Reply window open · </span>
                 {windowLeft(thread.windowRemainingMs)} left
               </Pill>
@@ -93,11 +93,11 @@ export default async function ChatPage({ params, searchParams }: PageProps<"/cha
                       <div
                         className={cn(
                           "max-w-[85%] rounded-xl px-3 pt-2 pb-1.5 text-[0.88rem] leading-[1.45] text-[#111b21] shadow-[0_1px_0.5px_rgb(11_20_26/0.13)] sm:max-w-[70%]",
-                          out ? "rounded-tr-sm bg-[#e7e4fb]" : "rounded-tl-sm bg-white",
+                          out ? "rounded-tr-sm bg-[oklch(0.96_0.02_65)]" : "rounded-tl-sm bg-white",
                         )}
                       >
                         {m.broadcast && (
-                          <Link href={`/campaigns/${m.broadcast.id}`} className="mb-1 flex items-center gap-1 text-[0.7rem] font-semibold text-[oklch(0.45_0.18_277)] hover:underline">
+                          <Link href={`/campaigns/${m.broadcast.id}`} className="mb-1 flex items-center gap-1 text-[0.7rem] font-semibold text-primary hover:underline">
                             <Megaphone className="size-3" /> {m.broadcast.name}
                           </Link>
                         )}

@@ -4,22 +4,22 @@ import { cn } from "@/lib/utils";
 export type Tone = "iris" | "sky" | "amber" | "rose" | "slate" | "violet" | "ink";
 
 const PILL: Record<Tone, string> = {
-  iris: "bg-[oklch(0.95_0.035_277)] text-[oklch(0.42_0.2_277)] ring-[oklch(0.86_0.07_277)]",
-  sky: "bg-[oklch(0.95_0.03_236)] text-[oklch(0.42_0.11_240)] ring-[oklch(0.86_0.06_236)]",
-  amber: "bg-[oklch(0.96_0.05_80)] text-[oklch(0.45_0.11_60)] ring-[oklch(0.87_0.09_75)]",
-  rose: "bg-[oklch(0.96_0.025_15)] text-[oklch(0.48_0.18_18)] ring-[oklch(0.87_0.07_15)]",
+  iris: "bg-[oklch(0.96_0.035_65)] text-[oklch(0.42_0.14_60)] ring-[oklch(0.88_0.07_65)]",
+  sky: "bg-[oklch(0.95_0.02_50)] text-[oklch(0.38_0.08_48)] ring-[oklch(0.87_0.05_50)]",
+  amber: "bg-[oklch(0.96_0.05_80)] text-[oklch(0.45_0.12_65)] ring-[oklch(0.87_0.09_75)]",
+  rose: "bg-[oklch(0.96_0.025_22)] text-[oklch(0.48_0.18_24)] ring-[oklch(0.88_0.07_24)]",
   slate: "bg-muted text-muted-foreground ring-border",
-  violet: "bg-[oklch(0.95_0.04_305)] text-[oklch(0.45_0.19_305)] ring-[oklch(0.86_0.08_305)]",
+  violet: "bg-[oklch(0.96_0.035_85)] text-[oklch(0.45_0.12_80)] ring-[oklch(0.88_0.07_80)]",
   ink: "bg-foreground text-background ring-foreground",
 };
 
 const DOT: Record<Tone, string> = {
-  iris: "bg-[oklch(0.55_0.21_277)]",
-  sky: "bg-[oklch(0.62_0.13_236)]",
-  amber: "bg-[oklch(0.72_0.15_70)]",
-  rose: "bg-[oklch(0.6_0.2_18)]",
+  iris: "bg-[oklch(0.56_0.16_62)]",
+  sky: "bg-[oklch(0.52_0.10_48)]",
+  amber: "bg-[oklch(0.70_0.15_72)]",
+  rose: "bg-[oklch(0.60_0.20_24)]",
   slate: "bg-muted-foreground/60",
-  violet: "bg-[oklch(0.58_0.2_305)]",
+  violet: "bg-[oklch(0.65_0.14_80)]",
   ink: "bg-background",
 };
 
@@ -105,7 +105,7 @@ export function EmptyState({
 }) {
   return (
     <div className={cn("flex flex-col items-center justify-center px-6 py-14 text-center", className)}>
-      <span className="grid size-14 place-items-center rounded-2xl bg-accent text-accent-foreground ring-1 ring-inset ring-[oklch(0.88_0.06_277)]">
+      <span className="grid size-14 place-items-center rounded-2xl bg-accent text-accent-foreground ring-1 ring-inset ring-primary/20 shadow-sm">
         <Icon className="size-6" strokeWidth={1.9} />
       </span>
       <h3 className="mt-4 text-base font-semibold">{title}</h3>
@@ -147,11 +147,11 @@ export function Section({
 }
 
 const AVATAR_TONES = [
-  "from-[oklch(0.62_0.19_277)] to-[oklch(0.5_0.22_290)]",
-  "from-[oklch(0.68_0.13_236)] to-[oklch(0.55_0.16_255)]",
-  "from-[oklch(0.72_0.15_60)] to-[oklch(0.62_0.18_35)]",
-  "from-[oklch(0.62_0.2_330)] to-[oklch(0.52_0.22_305)]",
-  "from-[oklch(0.6_0.06_270)] to-[oklch(0.42_0.06_270)]",
+  "from-[oklch(0.60_0.16_62)] to-[oklch(0.48_0.14_52)]",
+  "from-[oklch(0.54_0.12_48)] to-[oklch(0.42_0.10_38)]",
+  "from-[oklch(0.68_0.14_75)] to-[oklch(0.55_0.14_60)]",
+  "from-[oklch(0.42_0.04_55)] to-[oklch(0.28_0.03_55)]",
+  "from-[oklch(0.58_0.18_28)] to-[oklch(0.46_0.16_22)]",
 ];
 
 export function initials(name: string): string {

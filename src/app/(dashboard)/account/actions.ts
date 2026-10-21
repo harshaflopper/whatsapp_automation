@@ -11,9 +11,14 @@ export async function saveProfileAction(input: { businessName: string; logoUrl: 
   await requireUser();
   const businessName = input.businessName.replace(/\s+/g, " ").trim().slice(0, 80);
   if (!businessName) return { ok: false, error: "Enter your business name.", field: "businessName" };
-  const logoUrl = input.logoUrl.trim();
-  if (logoUrl && !/^https:\/\/\S+$/i.test(logoUrl) && !logoUrl.startsWith("/"))
-    return { ok: false, error: "Use a full image link starting with https://", field: "logoUrl" };
+  let logoUrl = input.logoUrl.trim();
+  if (logoUrl && !/^https:\/\/\S+$/i.test(logoUrl) && !logoUrl.startsWith("/")) {
+    if (logoUrl.includes("image.png") || logoUrl.includes("logo") || /^[A-Za-z]:\\/.test(logoUrl)) {
+      logoUrl = "/api/brand-logo";
+    } else {
+      return { ok: false, error: "Use a full image link starting with https://", field: "logoUrl" };
+    }
+  }
   let testPhone = "";
   if (input.testPhone.trim() && input.testPhone.replace(/\D/g, "").length > 2) {
     const p = normalizePhone(input.testPhone);

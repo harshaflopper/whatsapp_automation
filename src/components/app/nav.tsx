@@ -78,7 +78,7 @@ function NewCampaignButton({ onNavigate }: { onNavigate?: () => void }) {
       href="/campaigns/new"
       onClick={onNavigate}
       className={cn(
-        "flex h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[oklch(0.6_0.2_277)] to-[oklch(0.52_0.23_292)] text-[0.92rem] font-semibold text-white shadow-[0_8px_24px_-10px_oklch(0.6_0.22_285/0.9)] transition hover:brightness-110",
+        "flex h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[oklch(0.62_0.16_65)] to-[oklch(0.50_0.14_52)] text-[0.92rem] font-semibold text-white shadow-[0_8px_24px_-10px_oklch(0.54_0.165_62/0.7)] transition hover:brightness-110 active:scale-[0.99]",
         pathname === "/campaigns/new" && "ring-2 ring-white/30",
       )}
     >
@@ -108,7 +108,7 @@ function Footer({ business }: { business: React.ReactNode }) {
 export function SidebarNav({ business, unread }: { business: React.ReactNode; unread: number }) {
   return (
     <aside className="sticky top-0 hidden h-svh w-[17rem] shrink-0 flex-col gap-6 overflow-y-auto bg-sidebar p-4 text-sidebar-foreground lg:flex">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(70%_100%_at_20%_0%,oklch(0.55_0.2_277/0.35),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(70%_100%_at_20%_0%,oklch(0.55_0.16_65/0.25),transparent)]" />
       <div className="relative grid gap-5 pt-2">
         <NewCampaignButton />
         <NavLinks unread={unread} />

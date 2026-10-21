@@ -84,10 +84,10 @@ export function PhonePreview({
 }) {
   return (
     <div className={cn("mx-auto w-full max-w-[21rem]", className)}>
-      <div className="rounded-[2.4rem] bg-[oklch(0.2_0.03_278)] p-2.5 shadow-[0_30px_60px_-30px_oklch(0.3_0.1_278/0.6),inset_0_0_0_1px_rgb(255_255_255/0.08)]">
+      <div className="rounded-[2.4rem] bg-[oklch(0.16_0.008_55)] p-2.5 shadow-[0_30px_60px_-30px_oklch(0.1_0.02_55/0.7),inset_0_0_0_1px_rgb(255_255_255/0.1)]">
         <div className="overflow-hidden rounded-[1.9rem] bg-white">
           <div className="flex items-center gap-2.5 bg-[#f0f2f5] px-4 pt-6 pb-2.5">
-            <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-[oklch(0.62_0.2_277)] to-[oklch(0.48_0.23_292)] text-[0.65rem] font-bold text-white">
+            <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-[oklch(0.64_0.16_65)] to-[oklch(0.48_0.14_52)] text-[0.65rem] font-bold text-white shadow-sm">
               {businessName
                 .split(/\s+/)
                 .slice(0, 2)

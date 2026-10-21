@@ -148,7 +148,7 @@ export function DesignEditor({ initial, businessName }: { initial: EditorInitial
           </div>
         )}
         {initial.wasApproved && !initial.underReview && (
-          <div className="flex gap-3 rounded-2xl border border-[oklch(0.86_0.07_277)] bg-accent/60 p-4 text-sm">
+          <div className="flex gap-3 rounded-2xl border border-primary/25 bg-accent/60 p-4 text-sm">
             <Info className="mt-0.5 size-4 shrink-0 text-primary" />
             <p>This design is approved. If you submit changes, WhatsApp reviews it again and it can’t be used until approved. You can edit an approved design once a day.</p>
           </div>
@@ -182,7 +182,7 @@ export function DesignEditor({ initial, businessName }: { initial: EditorInitial
                       checked={on}
                       disabled={initial.categoryLocked}
                       onChange={() => setCategory(t.value)}
-                      className="mt-0.5 size-4 accent-[oklch(0.52_0.215_277)]"
+                      className="mt-0.5 size-4 accent-primary"
                     />
                     <span>
                       <span className="block text-sm font-semibold">{t.label}</span>

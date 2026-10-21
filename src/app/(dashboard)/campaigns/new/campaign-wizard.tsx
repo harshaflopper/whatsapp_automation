@@ -221,7 +221,7 @@ export function CampaignWizard({
             )}
 
             <label className={cn("flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition-colors", all ? "border-primary bg-accent/60" : "border-border hover:bg-muted/50")}>
-              <input type="checkbox" checked={all} onChange={(e) => setAll(e.target.checked)} className="size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]" />
+              <input type="checkbox" checked={all} onChange={(e) => setAll(e.target.checked)} className="size-4 cursor-pointer accent-primary" />
               <Users className="size-5 text-primary" />
               <span className="flex-1">
                 <span className="block text-sm font-semibold">All subscribed customers</span>
@@ -241,7 +241,7 @@ export function CampaignWizard({
                           type="checkbox"
                           checked={on}
                           onChange={(e) => setGroupIds(e.target.checked ? [...groupIds, g.id] : groupIds.filter((x) => x !== g.id))}
-                          className="size-4 cursor-pointer accent-[oklch(0.52_0.215_277)]"
+                          className="size-4 cursor-pointer accent-primary"
                         />
                         <span className="flex-1 truncate text-sm font-medium">{g.name}</span>
                         <span className="text-xs text-muted-foreground tabular-nums">{formatNumber(g.count)}</span>

@@ -71,7 +71,7 @@ export default async function CampaignPage({ params, searchParams }: PageProps<"
 
   const funnel: { label: string; value: number; pct: number; tone: Tone; filter: RecipientFilter }[] = [
     { label: "Sent", value: stats.sent, pct: percent(stats.sent, stats.total), tone: "slate", filter: "all" },
-    { label: "Delivered", value: stats.delivered, pct: percent(stats.delivered, stats.sent), tone: "sky", filter: "all" },
+    { label: "Delivered", value: stats.delivered, pct: percent(stats.delivered, stats.sent), tone: "slate", filter: "all" },
     { label: "Read", value: stats.read, pct: percent(stats.read, stats.sent), tone: "iris", filter: "read" },
     { label: "Replied", value: stats.replied, pct: percent(stats.replied, stats.sent), tone: "amber", filter: "replied" },
     { label: "Didn't receive", value: stats.notDelivered, pct: percent(stats.notDelivered, stats.total), tone: "rose", filter: "not_delivered" },
@@ -120,7 +120,7 @@ export default async function CampaignPage({ params, searchParams }: PageProps<"
 
       {b.status === "SCHEDULED" ? (
         <div className="surface mb-6 flex items-center gap-4 p-5">
-          <span className="grid size-12 place-items-center rounded-2xl bg-[oklch(0.95_0.04_305)] text-[oklch(0.45_0.19_305)]">
+          <span className="grid size-12 place-items-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/20">
             <CalendarClock className="size-6" />
           </span>
           <div>
@@ -138,7 +138,7 @@ export default async function CampaignPage({ params, searchParams }: PageProps<"
                   {formatNumber(done)} of {formatNumber(stats.total)} done
                 </span>
               </div>
-              <Meter value={percent(done, stats.total)} className="mt-3 h-2" tone="sky" />
+              <Meter value={percent(done, stats.total)} className="mt-3 h-2" tone="iris" />
             </div>
           )}
 

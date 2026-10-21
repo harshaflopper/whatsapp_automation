@@ -25,14 +25,14 @@ export default async function AccountPage() {
             />
           </Section>
           <Section
-            title={<span className="flex items-center gap-3"><IconChip icon={KeyRound} tone="violet" className="size-9" /> Login</span>}
+            title={<span className="flex items-center gap-3"><IconChip icon={KeyRound} tone="iris" className="size-9" /> Login</span>}
             description={`You sign in as ${session.email}.`}
           >
             <PasswordForm />
           </Section>
         </div>
         <div className="grid content-start gap-6">
-          <Section title={<span className="flex items-center gap-3"><IconChip icon={LifeBuoy} tone="sky" className="size-9" /> Help</span>}>
+          <Section title={<span className="flex items-center gap-3"><IconChip icon={LifeBuoy} tone="amber" className="size-9" /> Help</span>}>
             <p className="text-sm text-muted-foreground">Questions, a new number, or something not working? Our team is here to help.</p>
             <div className="mt-4 grid gap-2">
               {waLink && (

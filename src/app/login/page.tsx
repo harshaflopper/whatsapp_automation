@@ -22,8 +22,8 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <main className="grid min-h-svh lg:grid-cols-[1.05fr_1fr]">
       <section className="relative hidden overflow-hidden bg-sidebar p-12 text-sidebar-foreground lg:flex lg:flex-col">
-        <div className="pointer-events-none absolute -top-40 -left-40 size-[36rem] rounded-full bg-[oklch(0.55_0.22_277/0.45)] blur-3xl" />
-        <div className="pointer-events-none absolute -right-32 bottom-0 size-[28rem] rounded-full bg-[oklch(0.6_0.14_236/0.22)] blur-3xl" />
+        <div className="pointer-events-none absolute -top-40 -left-40 size-[36rem] rounded-full bg-[oklch(0.55_0.16_65/0.25)] blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 size-[28rem] rounded-full bg-[oklch(0.65_0.15_75/0.18)] blur-3xl" />
         <div className="relative">
           <Brand name={profile.businessName} logoUrl={profile.logoUrl} subtitle="WhatsApp Business" dark size="lg" />
         </div>
