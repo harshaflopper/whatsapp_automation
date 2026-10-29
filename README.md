@@ -49,7 +49,7 @@ A bird's-eye view of your business messaging pipeline. Track active subscribers,
 Comprehensive address book with international E.164 phone sanitization, opt-in status auditing, custom tags, and dynamic group segmentation. Features a high-speed CSV/Excel spreadsheet import wizard with column-mapping intelligence and deduplication.
 
 <p align="center">
-  <img src="docs/screenshots/03_contacts.png" alt="Contacts and Audience Manager" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+  <img src="" />
 </p>
 
 ---
