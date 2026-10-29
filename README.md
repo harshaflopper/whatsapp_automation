@@ -67,7 +67,7 @@ Create, organize, and sync pre-approved WhatsApp templates across Marketing, Uti
 Author dynamic templates with headers, body variables (`{{1}}`, `{{2}}`), footers, URL buttons, and quick-reply triggers. The real-time interactive preview renders exact mobile bubble sizing, fonts, and button behaviors as customers will see them on WhatsApp.
 
 <p align="center">
-  <img src="docs/screenshots/05_editor.png" alt="Design Editor with Phone Simulator" width="95%" style="border-radius: 10px; border: 1px solid rgba(0,0,0,0.1);" />
+  <img src=";" />
 </p>
 
 ---
